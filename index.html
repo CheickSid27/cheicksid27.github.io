@@ -525,16 +525,21 @@ footer{border-top:1px solid var(--line);padding-block:26px 44px;font-family:var(
     </article>
 
     <article class="work" style="--c:var(--lm)">
-      <div class="shot"><span class="strip"></span><span class="chip">IA · Agritech</span>
-        <img src="assets/cacao-dashboard.webp" alt="CacaoVision : tableau de bord des captures, plantes malades, taux de maladie et foyers à traiter" loading="lazy"></div>
+      <a class="shot affiche" href="cacaovision/" aria-label="Découvrir CacaoVision"><span class="strip"></span>
+        <img src="assets/cacao-affiche.webp" alt="Affiche CacaoVision : « La maladie, vue du ciel. » Vue de drone d'une plantation avec les foyers de maladie détectés, tableau de bord des foyers à traiter et feuille de cacaoyer analysée par l'IA" loading="lazy"></a>
       <div class="wbody">
-        <div class="pills"><span>Deep learning</span><span>Drone</span><span>EfficientNet</span><span>PostgreSQL</span></div>
+        <div class="pills"><span>Vision par ordinateur</span><span>Drone</span><span>YOLO26</span><span>EfficientNet</span></div>
         <h3>CacaoVision</h3>
-        <p class="desc">Les parcelles sont photographiées au téléphone ou par drone, puis analysées
-        par un pipeline à quatre modules : sain ou malade, type de maladie, sévérité, risque de
-        propagation. Le tableau de bord remonte les foyers à traiter en priorité.</p>
-        <p class="role"><b>Mon rôle :</b> architecture, pipeline IA, API et interfaces. Sujet de mon mémoire de Master, mené chez SaH Analytics.</p>
-        <div class="facts"><div><b>4</b> modules chaînés</div><div><b>15</b> suites de tests</div></div>
+        <p class="desc">Surveillance des plantations de cacao par drone et intelligence artificielle.
+        Le swollen shoot et la pourriture brune passent d'un arbre à l'autre et sont souvent repérés
+        trop tard. Le drone photographie chaque cacaoyer ; l'IA reconnaît la maladie parmi quatre,
+        estime sa gravité et regroupe les plants malades voisins en foyers classés par urgence, avec
+        les actions à mener. Pour les planteurs, les coopératives et les techniciens agricoles.</p>
+        <p class="role"><b>Mon rôle :</b> conception et développement complet, de l'entraînement des modèles
+        (détection, classification, sévérité) jusqu'à l'API, au tableau de bord et à l'application web de
+        capture sur téléphone. Projet de mon mémoire de Master en IA, mention Très bien, mené chez SaH Analytics.</p>
+        <div class="facts"><div><b>11k</b> lignes</div><div><b>185</b> tests automatisés</div><div><b>4</b> maladies reconnues</div></div>
+        <div class="wlink"><a href="cacaovision/">Découvrir CacaoVision <span class="arr">↗</span></a></div>
       </div>
     </article>
 

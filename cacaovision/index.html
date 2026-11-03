@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="CacaoVision : surveillance des plantations de cacao par drone et intelligence artificielle. Projet de Cheick Abdramane Sidibé.">
+<meta property="og:title" content="CacaoVision — la maladie, vue du ciel">
+<meta property="og:description" content="Un drone photographie la plantation, l'IA reconnaît la maladie de chaque cacaoyer et désigne les foyers à traiter en priorité.">
+<meta property="og:image" content="https://cheicksid27.github.io/assets/cacao-affiche.webp">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#06080D">
+<title>CacaoVision</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#06080D; --panel:#0B0F17; --panel2:#111823; --line:#1C2634;
+  --fg:#E4EDF5; --muted:#788CA3;
+  --or:#FB9B3C; --lm:#A3E635; --red:#FF5A44;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --disp:"Sora",system-ui,sans-serif;
+  --tech:"Chakra Petch",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--disp);font-weight:300;font-size:16px;line-height:1.65;margin:0;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#06080D}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(163,230,53,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(163,230,53,.045) 1px,transparent 1px);
+  background-size:54px 54px}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;line-height:1.08;text-wrap:balance;font-weight:800;letter-spacing:-.03em}
+p{margin:0}
+a{color:var(--lm);text-decoration:none}
+a:focus-visible{outline:2px solid var(--lm);outline-offset:3px}
+img{max-width:100%;display:block}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--lm);font-weight:500}
+.lead{font-size:18px;color:#B9C7D6;max-width:68ch}
+.sec{padding-block:72px;position:relative;z-index:1}
+.sec.alt{background:var(--panel);border-block:1px solid var(--line)}
+.sec h2{font-size:clamp(28px,4vw,40px);margin:10px 0 18px}
+.arr{display:inline-block;transition:transform .2s}
+a:hover .arr{transform:translate(3px,-3px)}
+
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:rgba(6,8,13,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.back{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.back:hover{color:var(--fg)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
+  padding:12px 18px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--fg);transition:.18s;font-weight:500}
+.btn:hover{border-color:var(--lm);color:var(--lm);transform:translateY(-2px)}
+.btn.fill{background:var(--lm);color:#0A0F05;border-color:var(--lm);font-weight:700}
+.btn.fill:hover{color:#0A0F05;box-shadow:0 0 30px -8px var(--lm)}
+
+.hero{padding-block:56px 28px}
+.hero h1{font-family:var(--tech);font-weight:700;letter-spacing:.01em;font-size:clamp(40px,7vw,68px);margin:12px 0 16px}
+.hero h1 b{color:var(--lm);font-weight:700}
+.poster{margin-top:34px;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 90px -40px rgba(163,230,53,.35)}
+.poster img{width:100%;height:auto;aspect-ratio:1600/925}
+.meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.meta b{color:var(--fg);font-weight:500}
+
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px}
+.card h3{font-size:18px;letter-spacing:-.01em;margin-bottom:8px;font-weight:700}
+.card p{font-size:14.5px;color:#A9B8C8}
+.card .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--or);margin-bottom:10px;display:block}
+
+.steps{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.steps li::before{counter-increment:s;content:counter(s);font-family:var(--tech);font-weight:700;font-size:22px;color:#0A0F05;background:var(--lm);
+  width:40px;height:40px;border-radius:10px;display:grid;place-items:center}
+.steps h3{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.steps p{font-size:14.5px;color:#A9B8C8;margin-top:4px}
+.steps .tech{font-family:var(--mono);font-size:11.5px;color:var(--lm);margin-top:8px;letter-spacing:.03em}
+
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;margin-top:28px}
+figure{margin:0}
+figure img{border-radius:14px;border:1px solid var(--line);width:100%;height:auto}
+figcaption{font-size:13px;color:var(--muted);margin-top:10px}
+.shots{display:grid;gap:26px;margin-top:30px}
+.shots .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.note{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:16px}
+
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.stack span{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:6px 12px;color:#C5D2DF}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+.facts div{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-family:var(--tech);font-weight:600;color:var(--muted);font-size:14px}
+.facts b{display:block;font-size:30px;color:var(--lm);font-variant-numeric:tabular-nums;line-height:1.1}
+.role{border-left:2px solid var(--lm);padding-left:16px;color:#B9C7D6;margin-top:22px;max-width:72ch}
+.role b{color:var(--fg);font-weight:600}
+
+.cta{text-align:center}
+.cta .row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+footer{border-top:1px solid var(--line);padding-block:24px 40px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .cols{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .shots .two{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .sec{padding-block:54px}
+  .steps li{grid-template-columns:40px 1fr;gap:12px;padding:16px}
+  .steps li::before{width:34px;height:34px;font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav class="top"><div class="in">
+  <a class="back" href="../#realisations">← Portfolio</a>
+  <a class="btn fill" href="../#contact">Demander une démo <span class="arr">↗</span></a>
+</div></nav>
+
+<header class="wrap hero">
+  <p class="eyebrow">Projet · Agritech · Intelligence artificielle</p>
+  <h1>Cacao<b>Vision</b></h1>
+  <p class="lead">Un système de surveillance des plantations de cacao par drone et intelligence artificielle.
+  Le drone photographie chaque cacaoyer, l'IA reconnaît la maladie et sa gravité, puis désigne les foyers
+  à traiter en priorité, avant qu'ils ne gagnent toute la parcelle.</p>
+  <div class="meta"><span><b>Côte d'Ivoire</b></span><span>Mémoire de Master en IA · <b>mention Très bien</b></span><span>Mené chez <b>SaH Analytics</b></span></div>
+  <div class="poster"><img src="../assets/cacao-affiche.webp" alt="Affiche CacaoVision : « La maladie, vue du ciel. » Vue de drone d'une plantation avec les foyers détectés, tableau de bord et feuille analysée par l'IA"></div>
+</header>
+
+<section class="sec alt"><div class="wrap">
+  <p class="eyebrow">Le problème</p>
+  <h2>Une maladie repérée trop tard gagne toute la parcelle</h2>
+  <p class="lead">La Côte d'Ivoire est le premier producteur mondial de cacao. Dans les plantations, les maladies
+  passent d'un arbre à l'autre, et un planteur ne peut pas inspecter chaque cacaoyer à l'œil, régulièrement,
+  sur plusieurs hectares.</p>
+  <div class="cols">
+    <div class="card"><span class="k">Swollen shoot</span><h3>Aucun traitement</h3><p>Maladie virale transmise par des cochenilles. Les arbres atteints doivent être arrachés : plus le foyer est trouvé tôt, moins on en perd.</p></div>
+    <div class="card"><span class="k">Pourriture brune</span><h3>Elle suit la pluie</h3><p>Le champignon se répand par les éclaboussures en saison des pluies. Retirer vite les cabosses atteintes limite la contagion.</p></div>
+    <div class="card"><span class="k">Moniliose, mirides</span><h3>Des signes discrets</h3><p>Taches sur les cabosses, piqûres d'insectes : des symptômes faciles à manquer quand on parcourt la plantation à pied.</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <p class="eyebrow">Comment ça marche</p>
+  <h2>De la photo au foyer à traiter</h2>
+  <p class="lead">Chaque photo passe par cinq étapes, confiées à des modèles d'IA puis à des règles de terrain.</p>
+  <ol class="steps">
+    <li><div><h3>Capture</h3><p>Le drone suit un trajet en serpentin au-dessus de la parcelle et prend une photo géolocalisée tous les 3 m. Un technicien peut aussi photographier une feuille ou une cabosse avec son téléphone.</p></div></li>
+    <li><div><h3>Détection du sujet</h3><p>L'IA repère la feuille ou la cabosse dans l'image et écarte le reste (ciel, sol, branches), pour que le diagnostic porte sur la bonne zone.</p><p class="tech">YOLO26</p></div></li>
+    <li><div><h3>Sain ou malade, puis quelle maladie</h3><p>Un premier modèle trie les plants sains et malades, un second reconnaît la maladie parmi quatre. Quand l'IA n'est pas assez sûre, le cas est marqué « à vérifier » au lieu d'être compté.</p><p class="tech">MobileNetV3 · EfficientNet-B0</p></div></li>
+    <li><div><h3>Gravité</h3><p>L'étendue des lésions et d'autres indices donnent un niveau de sévérité : faible, moyen ou élevé.</p><p class="tech">XGBoost</p></div></li>
+    <li><div><h3>Foyers et risque de propagation</h3><p>Les plants malades de la même maladie à 6 m ou moins forment un foyer. Chaque foyer reçoit une priorité et les actions recommandées par la filière. Les arbres voisins sont classés selon leur risque d'être touchés, en tenant compte de la météo.</p><p class="tech">Règles du mémoire · météo Open-Meteo</p></div></li>
+  </ol>
+</div></section>
+
+<section class="sec alt"><div class="wrap">
+  <p class="eyebrow">Ce que voit l'IA</p>
+  <h2>Les zones malades, mises en évidence</h2>
+  <div class="split">
+    <figure><img src="../assets/cacao-feuille.webp" alt="Feuille de cacaoyer atteinte de swollen shoot : photo d'origine à gauche, zones jaunies mises en évidence en rouge à droite" loading="lazy" width="1100" height="791">
+      <figcaption>Feuille atteinte de swollen shoot, photo du jeu de données. À droite, les zones jaunies sont mises en évidence.</figcaption></figure>
+    <div>
+      <p class="lead">Le swollen shoot jaunit la feuille entre les nervures. Ce sont ces zones que l'analyse isole pour estimer la gravité de l'atteinte.</p>
+      <p class="lead" style="margin-top:14px">Le résultat arrive sur le téléphone : la maladie, sa sévérité et, si le plant fait partie d'un foyer, son niveau d'urgence.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <p class="eyebrow">Le tableau de bord</p>
+  <h2>Toute la plantation sur un écran</h2>
+  <p class="lead">Le responsable suit les vols, voit les foyers sur la carte et sait par où commencer.</p>
+  <div class="shots">
+    <figure><img src="../assets/cacao-carte.webp" alt="Carte drone : trajet du drone, plants analysés et zones de foyers entourées" loading="lazy" width="1200" height="750">
+      <figcaption>Carte drone : chaque point est une photo du vol. Les foyers et leur zone à surveiller sont entourés, les arbres voisins colorés selon leur risque.</figcaption></figure>
+    <div class="two">
+      <figure><img src="../assets/cacao-dashboard.webp" alt="Vue générale : captures, plantes malades, taux de maladie, répartition des maladies et foyers à traiter" loading="lazy" width="856" height="482">
+        <figcaption>Vue générale : captures, taux de maladie, sévérité et foyers par priorité.</figcaption></figure>
+      <figure><img src="../assets/cacao-foyers.webp" alt="Foyers à traiter : fiches par foyer avec priorité, nombre de plants et actions recommandées" loading="lazy" width="856" height="482">
+        <figcaption>Foyers à traiter : priorité, étendue, plants à surveiller et actions à mener.</figcaption></figure>
+    </div>
+  </div>
+  <p class="note">Captures réalisées avec des données de démonstration.</p>
+</div></section>
+
+<section class="sec alt"><div class="wrap">
+  <p class="eyebrow">Pour qui</p>
+  <h2>Pensé pour ceux qui soignent la plantation</h2>
+  <div class="cols">
+    <div class="card"><h3>Planteurs</h3><p>Savoir quels arbres sont atteints et quoi faire, sans parcourir toute la parcelle.</p></div>
+    <div class="card"><h3>Coopératives</h3><p>Suivre l'état de plusieurs plantations et organiser les interventions là où elles comptent.</p></div>
+    <div class="card"><h3>Techniciens agricoles</h3><p>Confirmer les cas signalés et appuyer les planteurs avec un diagnostic déjà localisé. L'application ne prescrit aucun produit : ce choix revient à l'encadrement agricole.</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <p class="eyebrow">Réalisation</p>
+  <h2>Conçu et développé de bout en bout</h2>
+  <p class="role"><b>Mon rôle :</b> conception et développement complet. Entraînement des modèles
+  (détection, classification, sévérité), règles des foyers et du risque, API, tableau de bord, application web de capture
+  sur téléphone, simulateur de vol et tests. Sujet de mon mémoire de Master en IA à l'Université Félix Houphouët-Boigny,
+  mené chez SaH Analytics.</p>
+  <div class="facts">
+    <div><b>5</b>étapes d'analyse</div>
+    <div><b>4</b>maladies reconnues</div>
+    <div><b>11k</b>lignes de code</div>
+    <div><b>185</b>tests automatisés</div>
+  </div>
+  <div class="stack">
+    <span>Python</span><span>PyTorch</span><span>Ultralytics YOLO26</span><span>MobileNetV3</span><span>EfficientNet-B0</span><span>XGBoost</span>
+    <span>FastAPI</span><span>PostgreSQL</span><span>JavaScript</span><span>Leaflet</span><span>Notifications push</span><span>Open-Meteo</span>
+  </div>
+</div></section>
+
+<section class="sec alt cta"><div class="wrap">
+  <p class="eyebrow">Démonstration</p>
+  <h2>Voir CacaoVision en action</h2>
+  <p class="lead" style="margin-inline:auto">Le code source est privé. Je présente volontiers la plateforme en direct, avec un vol simulé et l'analyse complète.</p>
+  <div class="row">
+    <a class="btn fill" href="../#contact">Me contacter <span class="arr">↗</span></a>
+    <a class="btn" href="https://www.linkedin.com/in/cheick-sidibe27">LinkedIn <span class="arr">↗</span></a>
+    <a class="btn" href="../#realisations">Autres projets</a>
+  </div>
+</div></section>
+
+<div class="wrap"><footer>
+  <span>© 2026 CHEICK ABDRAMANE SIDIBÉ</span>
+  <a href="../">Retour au portfolio ↑</a>
+</footer></div>
+</body>
+</html>
