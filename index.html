@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Cheick Abdramane Sidibé — Data Engineer et développeur full stack à Abidjan. Reconnaissance faciale, vision par ordinateur, API et applications mobiles.">
+<meta property="og:title" content="Cheick Abdramane Sidibé — Data Engineer & Développeur Full Stack">
+<meta property="og:description" content="Portfolio : MYFACE, CacaoVision, CIMBBA, Interprète audio. Abidjan, Côte d'Ivoire.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#06080D">
+<style>:root{color-scheme:dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Portfolio Cheick Sidibé</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@200;300;400;600;700;800&display=swap">
+<style>
+/* Organisation reprise d'une DA de reference (nav, hero photo, specialites, recompenses,
+   realisations, bande de confiance, contact) ; traitement neon sombre et anime. */
+:root{
+  --bg:#06080D; --panel:#0B0F17; --panel2:#111823; --line:#1C2634;
+  --fg:#E4EDF5; --muted:#788CA3;
+  --or:#FB9B3C; --cy:#22D3EE; --mg:#F472B6; --lm:#A3E635; --vi:#A78BFA; --am:#FBBF24;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --disp:"Sora",system-ui,sans-serif;
+  --tech:"Chakra Petch",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--disp);font-weight:300;font-size:16px;line-height:1.65;margin:0;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);opacity:.4;mix-blend-mode:multiply}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(251,155,60,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(251,155,60,.05) 1px,transparent 1px);
+  background-size:54px 54px;animation:drift 28s linear infinite}
+@keyframes drift{to{background-position:54px 54px}}
+.glowfield{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(620px circle at var(--mx,50%) var(--my,18%),rgba(251,155,60,.14),transparent 62%),
+             radial-gradient(520px circle at 88% 10%,rgba(34,211,238,.09),transparent 60%),
+             radial-gradient(540px circle at 6% 86%,rgba(163,230,53,.07),transparent 62%)}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{margin:0;line-height:1.05;text-wrap:balance;font-weight:800;letter-spacing:-.03em}
+a{color:var(--or);text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+img{max-width:100%}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--or);font-weight:500}
+.k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+/* signature propre : cadre de detection a crochets d'angle, repris du metier (boite englobante) */
+.det{position:relative;display:inline-block;padding:5px 11px 5px 10px}
+.det::before,.det::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--or)}
+.det::before{top:0;left:0;border-right:0;border-bottom:0}
+.det::after{bottom:0;right:0;border-left:0;border-top:0}
+.det .conf{position:absolute;top:-9px;left:9px;background:var(--or);color:#0A0A0A;border-radius:4px;
+  padding:2px 8px;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.sec.alt .det .conf,.contact-sec .det .conf{background:var(--or)}
+@keyframes lock{0%{opacity:.25;transform:scale(1.14)}100%{opacity:1;transform:scale(1)}}
+.det.rv::before,.det.rv::after{animation:lock .5s cubic-bezier(.2,.7,.3,1) both}
+.sec{padding-block:82px}
+.sec.alt{background:var(--panel);border-block:1px solid var(--line)}
+.arr{display:inline-block;transition:transform .2s}
+a:hover .arr,.card:hover .arr{transform:translate(3px,-3px)}
+
+/* ---------- nav ---------- */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:rgba(6,8,13,.88);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#06080D}
+nav.top .in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-block:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono-logo{font-family:var(--tech);font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--fg)}
+.mono-logo b{color:var(--or)}
+.nav-links{display:flex;gap:22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--or)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;
+  text-transform:uppercase;padding:13px 20px;border-radius:9px;border:1px solid var(--line);
+  background:var(--panel);color:var(--fg);cursor:pointer;transition:.18s;font-weight:500}
+.btn:hover{border-color:var(--or);color:var(--or);box-shadow:0 0 26px -6px var(--or);transform:translateY(-2px)}
+.btn.fill{background:var(--or);color:#0A0A0A;border-color:var(--or);font-weight:700}
+.btn.fill:hover{color:#0A0A0A;box-shadow:0 0 34px -6px var(--or)}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:center;padding-block:66px 54px}
+.hello{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hello span{width:46px;height:1px;background:var(--or)}
+.hello b{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--muted);font-weight:400}
+h1{font-size:clamp(44px,8.6vw,96px);line-height:.94;color:var(--fg)}
+.det.rv{animation:none}
+h1 .l2{display:block;color:var(--fg)}
+.tagline{font-family:var(--tech);font-size:clamp(15px,2.5vw,22px);font-weight:600;color:var(--muted);margin-top:20px;letter-spacing:-.01em}
+.tagline i{color:var(--or);font-style:normal}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-foot{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;margin-top:38px;padding-top:26px;border-top:1px solid var(--line)}
+.stat-inline{display:flex;align-items:baseline;gap:10px}
+.stat-inline b{font-family:var(--tech);font-size:40px;font-weight:700;color:var(--or);line-height:1}
+.stat-inline span{font-size:14px;color:var(--muted);max-width:11ch;line-height:1.3}
+.socials{display:flex;gap:12px}
+.socials a{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
+  background:var(--panel);transition:.18s}
+.socials a:hover{border-color:var(--or);transform:translateY(-3px);box-shadow:0 0 22px -6px var(--or)}
+.socials svg{width:17px;height:17px;fill:var(--muted)}
+.socials a:hover svg{fill:var(--or)}
+
+/* photo detouree sur forme geometrique */
+.shape{position:relative;aspect-ratio:1/1.08;max-width:430px;margin-inline:auto;width:100%}
+.shape.cut::before,.shape.cut::after{inset:10% 2% 12% 6%}
+.shape::before{content:"";position:absolute;inset:6% 2% 2% 6%;background:linear-gradient(150deg,var(--or),#F2762C);
+  border-radius:38% 8% 38% 8%;box-shadow:0 0 90px -24px var(--or)}
+.shape::after{content:"";position:absolute;inset:6% 2% 2% 6%;border-radius:38% 8% 38% 8%;
+  border:2px solid var(--cy);transform:translate(10px,-10px);opacity:.75}
+.shape .inner{position:absolute;inset:6% 2% 2% 6%;border-radius:38% 8% 38% 8%;overflow:hidden}
+.shape .inner img{width:100%;height:100%;object-fit:cover;display:block}
+.shape.cut{overflow:visible}
+.shape.cut .cutout{position:absolute;left:0;right:0;bottom:-7%;width:100%;height:124%;object-fit:contain;
+  object-position:bottom center;z-index:1;filter:drop-shadow(0 18px 38px rgba(0,0,0,.55))}
+.shape .inner img{filter:saturate(1.04) contrast(1.03)}
+.badge-float{position:absolute;right:2%;bottom:6%;width:112px;height:112px;border-radius:50%;background:var(--panel);
+  border:1px solid var(--or);display:grid;place-items:center;text-align:center;z-index:2;
+  box-shadow:0 0 40px -10px var(--or);animation:bob 4.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.badge-float b{font-family:var(--tech);font-size:30px;font-weight:700;color:var(--or);display:block;line-height:1}
+.badge-float span{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);display:block;margin-top:4px;padding-inline:8px;line-height:1.4}
+
+/* ---------- terminal ---------- */
+.term{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;margin-block:0 10px;
+  box-shadow:0 24px 64px -30px rgba(251,155,60,.5)}
+.bar{display:flex;align-items:center;gap:8px;padding:11px 15px;background:var(--panel2);border-bottom:1px solid var(--line)}
+.dot{width:11px;height:11px;border-radius:50%}
+.screen{padding:22px 20px 26px;font-family:var(--mono);font-size:13px;min-height:168px}
+.screen .ln{white-space:pre-wrap;word-break:break-word;margin:0 0 5px}
+.pr{color:var(--lm)} .out{color:var(--muted)}
+.cur{display:inline-block;width:8px;height:14px;background:var(--or);vertical-align:-2px;animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- titres de section ---------- */
+.sec-head{margin-bottom:44px}
+.sec-head h2{font-size:clamp(32px,5.6vw,58px);margin-top:12px}
+.sec-head .lead{color:var(--muted);max-width:56ch;margin-top:18px;font-size:16px}
+.sec-head.split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+.center{text-align:center}
+.center .lead{margin-inline:auto}
+
+/* ---------- a propos ---------- */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:center}
+.about .shape::before{background:linear-gradient(150deg,var(--cy),var(--vi));box-shadow:0 0 90px -24px var(--cy);border-radius:8% 38% 8% 38%}
+.about .shape::after{border-color:var(--or);border-radius:8% 38% 8% 38%}
+.about .shape .inner{border-radius:8% 38% 8% 38%}
+.about p{color:var(--muted);margin:0 0 14px;max-width:60ch}
+.about h3{font-size:clamp(26px,4.4vw,44px);margin-bottom:10px}
+.about .job{font-family:var(--tech);font-size:clamp(16px,2.4vw,23px);font-weight:600;color:var(--or);margin-bottom:22px}
+
+/* ---------- specialites ---------- */
+.spec{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:24px;position:relative;
+  transition:.2s;min-width:0;display:flex;flex-direction:column;gap:16px}
+.card:hover{transform:translateY(-4px);border-color:var(--c,var(--or));box-shadow:0 0 42px -14px var(--c,var(--or))}
+.ico{width:48px;height:48px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center}
+.ico svg{width:22px;height:22px;fill:none;stroke:var(--c,var(--or));stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.card h4{font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.card .d{font-size:13.5px;color:var(--muted);margin-top:-6px}
+.card .arr{color:var(--c,var(--or));font-size:19px;margin-top:auto}
+.card.contact{background:var(--or);border-color:var(--or);justify-content:space-between;min-height:190px;gap:12px}
+.card.contact .big{font-size:34px;color:#0A0A0A;align-self:flex-end;line-height:1}
+.card.contact .k{color:rgba(10,10,10,.72);display:block;margin-bottom:9px}
+.card.contact .mailv{display:block;font-family:var(--mono);font-size:12px;line-height:1.55;color:#0A0A0A;
+  font-weight:600;overflow-wrap:normal;word-break:normal;user-select:all}
+
+/* ---------- anneau techno ---------- */
+.stage{height:300px;perspective:1150px;position:relative;margin-top:10px}
+.ring{position:absolute;inset:0;margin:auto;width:150px;height:150px;transform-style:preserve-3d;animation:spin 28s linear infinite}
+.stage:hover .ring{animation-play-state:paused}
+@keyframes spin{to{transform:rotateY(360deg)}}
+.tile{position:absolute;top:50%;left:50%;width:94px;height:94px;margin:-47px 0 0 -47px;border-radius:16px;
+  background:var(--panel2);border:1px solid var(--line);display:grid;place-items:center;
+  box-shadow:0 0 30px -14px var(--c);transition:border-color .2s}
+.tile svg{width:42px;height:42px;display:block}
+.tile b{position:absolute;bottom:8px;left:0;right:0;font-family:var(--mono);font-size:8.5px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tile:hover{border-color:var(--c)}
+.ring-glow{position:absolute;inset:0;margin:auto;width:300px;height:300px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(251,155,60,.11),transparent 66%)}
+
+/* ---------- resume + recompenses ---------- */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.tl{border-left:1px solid var(--line);margin-left:7px;padding-left:26px;display:flex;flex-direction:column;gap:30px}
+.ev{position:relative}
+.ev::before{content:"";position:absolute;left:-32px;top:8px;width:10px;height:10px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--c)}
+.ev.now::before{animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(251,155,60,.6)}70%{box-shadow:0 0 0 10px rgba(251,155,60,0)}100%{box-shadow:0 0 0 0 rgba(251,155,60,0)}}
+.ev h4{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.ev .badge{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  border:1px solid var(--c);color:var(--c);border-radius:4px;padding:3px 8px;margin-left:9px;vertical-align:2px}
+.ev .when{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:5px}
+.ev p{margin:10px 0 0;font-size:14.5px;color:var(--muted);max-width:52ch}
+.ev .about-co{margin-top:10px;font-size:13px;opacity:.82;border-left:2px solid var(--line);padding-left:12px}
+.awards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.aw{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:22px;transition:.2s;min-width:0}
+.aw:hover{border-color:var(--c);box-shadow:0 0 40px -16px var(--c)}
+.aw .row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.aw .ico{width:44px;height:44px}
+.aw .yr{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.aw .lbl{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:14px;color:var(--fg)}
+.aw .lbl i{width:7px;height:7px;border-radius:50%;background:var(--c);display:inline-block;flex:none}
+.aw h4{font-size:17.5px;font-weight:600;margin-top:9px;line-height:1.32}
+.aw p{font-size:13.5px;color:var(--muted);margin:8px 0 0}
+
+/* ---------- realisations ---------- */
+.works{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.work{background:var(--panel2);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.2s;min-width:0;
+  display:flex;flex-direction:column}
+.work:hover{border-color:var(--c);box-shadow:0 0 52px -20px var(--c);transform:translateY(-4px)}
+.shot{position:relative;background:var(--panel);border-bottom:1px solid var(--line);overflow:hidden}
+.shot .strip{position:absolute;inset:0 0 auto;height:3px;background:var(--c);z-index:2}
+.shot>img{width:100%;height:330px;object-fit:cover;object-position:top center;display:block}
+.shot.portrait{background:#0A0E15}
+.shot.portrait>img{object-fit:contain;padding:14px 0;height:360px}
+.shot .chip{position:absolute;left:14px;top:16px;z-index:3;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--or);color:#0A0A0A;border-radius:6px;padding:5px 10px;font-weight:700}
+.more-note{margin:30px auto 0;max-width:72ch;text-align:center;font-size:14.5px;color:var(--muted);
+  border:1px dashed var(--line);border-radius:12px;padding:18px 22px}
+.more-note b{color:var(--fg);font-weight:600}
+.wbody{padding:22px;display:flex;flex-direction:column;gap:14px;flex:1}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pills span{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--muted)}
+.work h3{font-size:clamp(19px,2.8vw,25px);font-weight:700;color:var(--fg);line-height:1.2}
+.work .desc{font-size:14.5px;color:var(--muted);margin:0}
+.work .role{font-size:13px;color:var(--muted);border-left:2px solid var(--c);padding-left:12px;margin:0}
+.work .role b{color:var(--fg);font-weight:600}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.facts div{font-family:var(--tech);font-size:13px;font-weight:600;color:var(--muted);
+  border:1px solid var(--line);border-radius:7px;padding:7px 11px;background:var(--panel)}
+.facts b{color:var(--c);font-size:17px;margin-right:5px;font-variant-numeric:tabular-nums}
+.wlink{font-family:var(--mono);font-size:12.5px}
+.wlock{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+/* ---------- bande de confiance ---------- */
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.trust div{background:var(--panel);padding:26px 18px;text-align:center;transition:.2s;min-width:0}
+.trust div:hover{background:var(--panel2)}
+.trust b{font-family:var(--tech);font-size:16px;font-weight:700;color:var(--fg);display:block;letter-spacing:-.01em}
+.trust span{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);display:block;margin-top:6px}
+
+/* ---------- contact ---------- */
+.contact-sec{background:#04060A;border-top:1px solid var(--line)}
+.cgrid{display:grid;grid-template-columns:1fr 1.15fr;gap:46px;align-items:center}
+.cgrid h2{font-size:clamp(36px,6.4vw,66px)}
+.ccards{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.cc{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:26px;transition:.2s;min-width:0;
+  display:flex;flex-direction:column;gap:26px;justify-content:space-between}
+.cc:hover{border-color:var(--or);box-shadow:0 0 44px -16px var(--or)}
+.cc p{margin:0;font-size:17px;font-weight:400;line-height:1.4}
+.cc .val{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--or);
+  font-family:var(--mono);font-size:15px;font-weight:500;word-break:break-all;user-select:all}
+.loc{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:26px;color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--line);padding-block:26px 44px;font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between;align-items:center}
+.totop{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  width:52px;height:52px;border-radius:50%;background:var(--or);color:#0A0A0A;border:0;display:grid;place-items:center;
+  cursor:pointer;z-index:8;font-size:21px;box-shadow:0 0 34px -8px var(--or);transition:.2s}
+.totop:hover{transform:translateY(-4px)}
+
+.rv{animation:rise .55s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rise{from{opacity:.2;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:980px){
+  .hero,.about,.two-col,.cgrid{grid-template-columns:1fr;gap:38px}
+  .sec-head.split{grid-template-columns:1fr;gap:18px}
+  .spec{grid-template-columns:repeat(2,1fr)}
+  .works{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .shape{max-width:330px}
+}
+@media (max-width:560px){
+  .spec,.awards,.ccards{grid-template-columns:1fr}
+  .shot>img{height:250px}
+  .sec{padding-block:58px}
+  .stage{height:250px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-py" viewBox="0 0 24 24"><path fill="#3776AB" d="M11.9 2c-2.4 0-4.2.5-4.2 2.5v2h4.4v.6H5.9C3.8 7.1 3 8.6 3 10.9c0 2.3.8 3.8 2.9 3.8h1.6v-2.3c0-1.9 1.6-3.3 3.5-3.3h3.5c1.4 0 2.5-1.1 2.5-2.5V4.5C17 2.9 15.2 2 11.9 2zm-2.4 1.6c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9z"/><path fill="#FFD43B" d="M12.1 22c2.4 0 4.2-.5 4.2-2.5v-2h-4.4v-.6h6.2c2.1 0 2.9-1.5 2.9-3.8 0-2.3-.8-3.8-2.9-3.8h-1.6v2.3c0 1.9-1.6 3.3-3.5 3.3H9.5C8.1 14.9 7 16 7 17.4v2.1C7 21.1 8.8 22 12.1 22zm2.4-1.6c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9z"/></symbol>
+<symbol id="i-fa" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="none" stroke="#05998B" stroke-width="1.7"/><path fill="#05998B" d="M12.9 4.6 6.8 13.1h4.1l-.9 6.3 6.2-8.6h-4.2z"/></symbol>
+<symbol id="i-pg" viewBox="0 0 24 24"><path fill="none" stroke="#4169E1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M17.6 4.6c-1.7-.9-4-1.1-6.2-.8-2.6.4-4.6 1.7-5.3 3.6-.7 2 .1 4.9.6 7.3.4 1.9.9 3.9 2.1 4.6 1 .6 2-.2 2.2-1.4.2-1.1-.3-2.4-.3-3.6 0-1 .4-1.8 1.3-1.8s1.3.8 1.4 1.8c0 1.1-.3 2.3-.1 3.2.2.9.9 1.4 1.7 1.2 1.5-.4 2.4-2.9 2.9-5.1.5-2.3.9-4.9.4-6.6-.2-.8-.6-1.5-1.3-1.9"/><circle cx="9.4" cy="8.6" r=".95" fill="#4169E1"/><circle cx="14.6" cy="8.4" r=".8" fill="#4169E1"/></symbol>
+<symbol id="i-pt" viewBox="0 0 24 24"><path fill="#EE4C2C" d="M12 2.3 8 6.3c-2.2 2.2-2.2 5.8 0 8s5.8 2.2 8 0 2.2-5.8 0-8l-1.2 1.2c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0-1.5-4 0-5.5L12 5.1z"/><circle cx="14.9" cy="5.6" r="1.25" fill="#EE4C2C"/></symbol>
+<symbol id="i-dk" viewBox="0 0 24 24"><g fill="#2496ED"><rect x="3.8" y="9.4" width="2.7" height="2.5" rx=".3"/><rect x="7" y="9.4" width="2.7" height="2.5" rx=".3"/><rect x="10.2" y="9.4" width="2.7" height="2.5" rx=".3"/><rect x="7" y="6.5" width="2.7" height="2.4" rx=".3"/><rect x="10.2" y="6.5" width="2.7" height="2.4" rx=".3"/><rect x="10.2" y="3.7" width="2.7" height="2.3" rx=".3"/></g><path fill="#2496ED" d="M20.8 11.2c-.6-.4-1.9-.6-2.9-.4-.2-1-.7-1.8-1.6-2.5l-.5-.4-.4.5c-.6.8-.8 2-.2 3-.3.1-.7.2-1.2.2H1.1c-.2 1.9.3 4.3 1.9 5.9 1.5 1.5 3.6 2.2 6.3 2.2 5.8 0 10.1-2.7 12.1-7.5.9 0 1.9-.3 2.3-1z"/></symbol>
+<symbol id="i-nx" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.3" fill="none" stroke="#E4EDF5" stroke-width="1.6"/><path fill="none" stroke="#E4EDF5" stroke-width="1.9" stroke-linecap="round" d="M8.6 16V8l7.3 9.4"/><path fill="none" stroke="#E4EDF5" stroke-width="1.9" stroke-linecap="round" d="M15.6 8v5"/></symbol>
+<symbol id="i-ts" viewBox="0 0 24 24"><rect x="2.2" y="2.2" width="19.6" height="19.6" rx="2.4" fill="#3178C6"/><path fill="#fff" d="M11.1 10.8v1.7h2.7v7.1h2v-7.1h2.7v-1.7z"/><path fill="#fff" d="M9.3 10.7c-1.9 0-3.1 1-3.1 2.5 0 1.3.8 2 2.3 2.5 1.1.4 1.4.6 1.4 1.1 0 .4-.4.7-1.1.7-.8 0-1.6-.4-2.1-.9v2c.6.4 1.4.6 2.3.6 2 0 3.2-1 3.2-2.6 0-1.3-.8-2-2.4-2.6-1-.4-1.3-.6-1.3-1 0-.4.3-.6.9-.6.7 0 1.4.3 1.9.7v-1.9c-.6-.3-1.3-.5-2-.5z"/></symbol>
+<symbol id="i-fl" viewBox="0 0 24 24"><path fill="#47C5FB" d="M14.3 1.6 4 11.9l3.2 3.2L20.6 1.6z"/><path fill="#47C5FB" opacity=".85" d="M14.2 11.3 8.6 16.9l3.2 3.3 3.2-3.2h5.6z"/><path fill="#00569E" opacity=".9" d="M11.8 20.2l3.2 3.2h5.6l-5.6-5.6z"/></symbol>
+<symbol id="i-re" viewBox="0 0 24 24"><g fill="none" stroke="#61DAFB" stroke-width="1.3"><ellipse cx="12" cy="12" rx="10" ry="3.9"/><ellipse cx="12" cy="12" rx="10" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="3.9" transform="rotate(120 12 12)"/></g><circle cx="12" cy="12" r="2" fill="#61DAFB"/></symbol>
+<symbol id="i-ng" viewBox="0 0 24 24"><path fill="#009639" d="M12 1.4 2.6 6.9v10.2L12 22.6l9.4-5.5V6.9z"/><path fill="#fff" d="M9 16.6V9.9l5.4 6.7h1.8V7.4h-1.9v6.7L8.9 7.4H7.1v9.2z"/></symbol>
+<symbol id="i-gt" viewBox="0 0 24 24"><g stroke="#F05032" stroke-width="1.7" fill="none" stroke-linecap="round"><path d="M7 6.5v6.8a3 3 0 0 0 3 3h4"/><path d="M17 8.4v2.2"/></g><g fill="#F05032"><circle cx="7" cy="4.6" r="2.3"/><circle cx="17" cy="6.5" r="2.3"/><circle cx="16" cy="18.5" r="2.3"/></g></symbol>
+<symbol id="i-dt" viewBox="0 0 24 24"><path fill="#00C4B3" d="M7.1 4.3 3 8.4l8.4 11.3h8.5z"/><path fill="#0075C9" opacity=".8" d="M7.1 4.3 11.3.2 20 8.8v10.9l-8.6-.4z"/></symbol>
+<symbol id="s-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="s-srv" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.6"/><rect x="3" y="14" width="18" height="6" rx="1.6"/><path d="M7 7h.01M7 17h.01"/></symbol>
+<symbol id="s-dat" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="3.2"/><path d="M4 5.5v13c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2v-13"/><path d="M4 12c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2"/></symbol>
+<symbol id="s-mob" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.6"/><path d="M11 18.5h2"/></symbol>
+<symbol id="s-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+<symbol id="s-cloud" viewBox="0 0 24 24"><path d="M17.5 18H7a4.5 4.5 0 1 1 .9-8.9A6 6 0 0 1 19 10.4a4 4 0 0 1-1.5 7.6Z"/></symbol>
+<symbol id="s-cup" viewBox="0 0 24 24"><path d="M7 3h10v5a5 5 0 0 1-10 0V3Z"/><path d="M7 5H4.5v1.5A3.5 3.5 0 0 0 8 10M17 5h2.5v1.5A3.5 3.5 0 0 1 16 10M9.5 21h5M12 13v8"/></symbol>
+<symbol id="s-sat" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="4"/><path d="m6.3 6.3 2.1 2.1M15.6 15.6l2.1 2.1M17.7 6.3l-2.1 2.1M8.4 15.6l-2.1 2.1"/></symbol>
+<symbol id="s-cert" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.8"/><path d="M8 20l4-2.5 4 2.5v-4"/><path d="M8 9h8M8 12h5"/></symbol>
+<symbol id="s-cap" viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M5 11v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></symbol>
+<symbol id="so-li" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></symbol>
+<symbol id="so-gh" viewBox="0 0 24 24"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.47c.53.1.72-.23.72-.5v-1.8c-2.92.63-3.54-1.4-3.54-1.4-.48-1.22-1.17-1.54-1.17-1.54-.96-.65.07-.64.07-.64 1.06.07 1.62 1.09 1.62 1.09.94 1.6 2.47 1.14 3.07.87.1-.68.37-1.14.67-1.4-2.33-.27-4.78-1.17-4.78-5.2 0-1.15.41-2.1 1.08-2.83-.11-.27-.47-1.34.1-2.8 0 0 .88-.28 2.89 1.08a10 10 0 0 1 5.26 0c2-1.36 2.88-1.08 2.88-1.08.57 1.46.21 2.53.1 2.8.68.73 1.08 1.68 1.08 2.83 0 4.04-2.45 4.93-4.79 5.19.38.33.71.97.71 1.96v2.9c0 .28.19.61.73.5A10.5 10.5 0 0 0 12 1.5z"/></symbol>
+<symbol id="so-ml" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+</defs></svg>
+
+<div class="grid-bg"></div><div class="glowfield" id="gf"></div>
+
+<nav class="top"><div class="in">
+  <span class="mono-logo">C<b>A</b>S</span>
+  <div class="nav-links">
+    <a href="#apropos">À propos</a><a href="#specialites">Spécialités</a>
+    <a href="#parcours">Parcours</a><a href="#realisations">Réalisations</a>
+  </div>
+  <a class="btn fill" href="#contact">Discutons <span class="arr">↗</span></a>
+</div></nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div>
+      <div class="hello"><span></span><b>Hello, je suis</b></div>
+      <h1><span class="det"><span class="conf">identité · 1.00</span>CHEICK</span><span class="l2">SIDIBÉ</span></h1>
+      <p class="tagline">Data Engineer <i>|</i> Développeur Full Stack</p>
+      <div class="hero-cta">
+        <a class="btn fill" href="#contact">Discutons <span class="arr">↗</span></a>
+        <a class="btn" href="#realisations">Mes projets <span class="arr">↗</span></a>
+      </div>
+      <div class="hero-foot">
+        <div class="stat-inline"><b>6</b><span>projets livrés</span></div>
+        <div class="stat-inline"><b>3</b><span>entreprises</span></div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/cheick-sidibe27" aria-label="LinkedIn"><svg><use href="#so-li"/></svg></a>
+          <a href="https://github.com/CheickSid27" aria-label="GitHub"><svg><use href="#so-gh"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="shape cut">
+      <img class="cutout" src="assets/photo-hero.png" alt="Cheick Abdramane Sidibé, en costume, les bras croisés">
+      <div class="badge-float"><div><b>Data Eng.</b><span>&amp; Full Stack</span></div></div>
+    </div>
+  </section>
+
+  <div class="term">
+    <div class="bar">
+      <span class="dot" style="background:#FB7185"></span><span class="dot" style="background:#FBBF24"></span><span class="dot" style="background:#A3E635"></span>
+      <span class="k" style="margin-left:9px">cheick@abidjan — ~/portfolio</span>
+    </div>
+    <div class="screen" id="sc">
+      <p class="ln"><span class="pr">$</span> whoami</p>
+      <p class="ln out">cheick_abdramane_sidibe</p>
+    </div>
+  </div>
+</div>
+
+<section class="sec alt" id="apropos"><div class="wrap">
+  <div class="about">
+    <div class="shape">
+      <div class="inner"><img src="assets/photo-about.jpg" alt="Cheick Abdramane Sidibé le jour de sa remise de diplôme, écharpe de la promotion 2025-2026"></div>
+      <div class="badge-float" style="right:auto;left:0;bottom:12%"><div><b>2<sup>e</sup></b><span>national ARIEL</span></div></div>
+    </div>
+    <div>
+      <p class="eyebrow">Bonjour, je suis</p>
+      <h3><span class="det"><span class="conf">0.99</span>CHEICK ABDRAMANE SIDIBÉ</span></h3>
+      <p class="job">Data Engineer et Développeur Full Stack</p>
+      <p>Passionné par l'intelligence artificielle appliquée et le traitement d'images, je construis
+      des systèmes qui voient, écoutent et décident : reconnaissance faciale sur index vectoriel,
+      détection de maladies de plantations par drone, transcription audio multilingue.</p>
+      <p>Mon approche va du modèle jusqu'à l'interface que les gens utilisent vraiment : des tests
+      contre une vraie base de données plutôt que des simulacres, des reprises automatiques quand un
+      traitement s'interrompt, des replis quand le GPU n'est pas disponible, et des limites
+      documentées plutôt que masquées.</p>
+      <p>Mon objectif est de bâtir des technologies utiles pour l'Afrique de l'Ouest, dans
+      l'agriculture, l'événementiel et la santé.</p>
+      <div class="hero-cta"><a class="btn" href="#parcours">Mon parcours <span class="arr">↗</span></a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="specialites"><div class="wrap">
+  <div class="sec-head split">
+    <div><p class="eyebrow">Services</p><h2><span class="det"><span class="conf">0.98</span>Mes spécialités</span></h2></div>
+    <p class="lead">Je conçois et développe des solutions combinant vision par ordinateur, data,
+    backend et applications mobiles, pour répondre à des problèmes réels sur le terrain.</p>
+  </div>
+  <div class="spec">
+    <div class="card" style="--c:var(--lm)"><div class="ico"><svg><use href="#s-eye"/></svg></div>
+      <h4>Vision par ordinateur</h4><p class="d">Détection, classification et regroupement d'images. InsightFace, EfficientNet, OpenCV.</p><span class="arr">↗</span></div>
+    <div class="card" style="--c:var(--cy)"><div class="ico"><svg><use href="#s-srv"/></svg></div>
+      <h4>Backend &amp; API</h4><p class="d">API REST asynchrones, FastAPI, SQLAlchemy, migrations et tests sur base réelle.</p><span class="arr">↗</span></div>
+    <div class="card" style="--c:var(--mg)"><div class="ico"><svg><use href="#s-dat"/></svg></div>
+      <h4>Data &amp; Machine Learning</h4><p class="d">Préparation, nettoyage et modélisation. XGBoost, CatBoost, recherche vectorielle.</p><span class="arr">↗</span></div>
+    <div class="card contact" style="--c:var(--or)">
+      <div><span class="k">Dites bonjour !</span><span class="mailv" id="mail">cheickabdramanesidibe<wbr>@gmail.com</span></div>
+      <span class="big arr">↗</span></div>
+    <div class="card" style="--c:var(--vi)"><div class="ico"><svg><use href="#s-mob"/></svg></div>
+      <h4>Applications mobiles</h4><p class="d">Flutter et Dart, compilation multi-plateforme depuis une base de code unique.</p><span class="arr">↗</span></div>
+    <div class="card" style="--c:var(--am)"><div class="ico"><svg><use href="#s-code"/></svg></div>
+      <h4>Développement full stack</h4><p class="d">Next.js, React et TypeScript, interfaces progressives et installables.</p><span class="arr">↗</span></div>
+    <div class="card" style="--c:var(--or)"><div class="ico"><svg><use href="#s-cloud"/></svg></div>
+      <h4>Infrastructure</h4><p class="d">Docker, nginx, stockage objet S3, inférence GPU avec repli CPU automatique.</p><span class="arr">↗</span></div>
+    <div class="card" style="--c:var(--cy)"><div class="ico"><svg><use href="#s-sat"/></svg></div>
+      <h4>Analyse de données</h4><p class="d">Exploration, visualisation et restitution. Power BI, R, notebooks.</p><span class="arr">↗</span></div>
+  </div>
+
+  <div class="sec-head center" style="margin-top:76px;margin-bottom:0">
+    <p class="eyebrow">Stack technique</p><h2><span class="det"><span class="conf">0.97</span>Ce avec quoi je construis</span></h2>
+  </div>
+  <div class="stage" id="stage">
+    <div class="ring-glow"></div>
+    <div class="ring" id="ring">
+      <div class="tile" style="--c:#3776AB"><svg><use href="#i-py"/></svg><b>Python</b></div>
+      <div class="tile" style="--c:#05998B"><svg><use href="#i-fa"/></svg><b>FastAPI</b></div>
+      <div class="tile" style="--c:#4169E1"><svg><use href="#i-pg"/></svg><b>Postgres</b></div>
+      <div class="tile" style="--c:#EE4C2C"><svg><use href="#i-pt"/></svg><b>PyTorch</b></div>
+      <div class="tile" style="--c:#2496ED"><svg><use href="#i-dk"/></svg><b>Docker</b></div>
+      <div class="tile" style="--c:#E4EDF5"><svg><use href="#i-nx"/></svg><b>Next.js</b></div>
+      <div class="tile" style="--c:#3178C6"><svg><use href="#i-ts"/></svg><b>TypeScript</b></div>
+      <div class="tile" style="--c:#47C5FB"><svg><use href="#i-fl"/></svg><b>Flutter</b></div>
+      <div class="tile" style="--c:#61DAFB"><svg><use href="#i-re"/></svg><b>React</b></div>
+      <div class="tile" style="--c:#009639"><svg><use href="#i-ng"/></svg><b>nginx</b></div>
+      <div class="tile" style="--c:#F05032"><svg><use href="#i-gt"/></svg><b>Git</b></div>
+      <div class="tile" style="--c:#00C4B3"><svg><use href="#i-dt"/></svg><b>Dart</b></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec alt" id="parcours"><div class="wrap">
+  <div class="sec-head split">
+    <div><p class="eyebrow">Parcours</p><h2><span class="det"><span class="conf">0.96</span>D'où je viens</span></h2></div>
+    <p class="lead">Trois entreprises ivoiriennes, un Master en intelligence artificielle, et une
+    distinction nationale sur un défi de l'Agence Spatiale Européenne.</p>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <p class="k" style="margin-bottom:20px">Expérience</p>
+      <div class="tl">
+        <div class="ev now" style="--c:var(--or)">
+          <h4>SaH Analytics International<span class="badge">En poste</span></h4>
+          <div class="when">Data Engineer · Abidjan · depuis juillet 2026</div>
+          <p>Travaux de data et d'intelligence artificielle. C'est dans ce cadre que j'ai mené mon
+          mémoire de Master sur CacaoVision. Première collaboration en 2025 sur des modèles d'analyse.</p>
+          <p class="about-co">Entreprise ivoirienne d'IA et de données fondée en 2019, à Cocody.
+          Elle a racheté le cabinet data354 en 2025 et opère son propre centre de données.</p>
+        </div>
+        <div class="ev" style="--c:var(--cy)">
+          <h4>Ebenyx Technologies</h4>
+          <div class="when">Développeur web · Abidjan · 2022</div>
+          <p>Développement d'applications web, backend et frontend, amélioration de fonctionnalités.</p>
+          <p class="about-co">Société de services informatiques au Plateau, Abidjan.</p>
+        </div>
+        <div class="ev" style="--c:var(--mg)">
+          <h4>CIMBBA</h4>
+          <div class="when">Support informatique · Grand-Bassam · 2021</div>
+          <p>Maintenance des équipements et support aux utilisateurs. Client revenu me confier la
+          refonte complète de son site cinq ans plus tard.</p>
+          <p class="about-co">Centre d'imagerie médico-biologique de Bassam.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="k" style="margin-bottom:20px">Formation &amp; distinctions</p>
+      <div class="awards">
+        <div class="aw" style="--c:var(--lm)">
+          <div class="row"><div class="ico"><svg><use href="#s-sat"/></svg></div></div>
+          <div class="lbl"><i></i> 2<sup>e</sup> au plan national</div>
+          <h4>Défi IA ARIEL — ESA / CNES</h4>
+          <p>Détection d'eau et de nuages dans l'atmosphère d'exoplanètes, à partir de données spectrales.</p>
+        </div>
+        <div class="aw" style="--c:var(--or)">
+          <div class="row"><div class="ico"><svg><use href="#s-cap"/></svg></div><span class="yr">2026</span></div>
+          <div class="lbl"><i></i> Diplôme obtenu</div>
+          <h4>Master — Intelligence Artificielle</h4>
+          <p>Université Félix Houphouët-Boigny, Cocody. Mémoire : CacaoVision.</p>
+        </div>
+        <div class="aw" style="--c:var(--mg)">
+          <div class="row"><div class="ico"><svg><use href="#s-cap"/></svg></div><span class="yr">2024</span></div>
+          <h4>Master 1 — Big Data</h4><p>Institut CERCO, Abidjan.</p></div>
+        <div class="aw" style="--c:var(--am)">
+          <div class="row"><div class="ico"><svg><use href="#s-cap"/></svg></div><span class="yr">2023</span></div>
+          <h4>Licence — Génie Logiciel</h4><p>Institut Ivoirien de Technologie, Grand-Bassam.</p></div>
+        <div class="aw" style="--c:var(--cy)">
+          <div class="row"><div class="ico"><svg><use href="#s-cert"/></svg></div></div>
+          <h4>AWS Essentials — Cloud Computing</h4><p>Certification.</p></div>
+        <div class="aw" style="--c:var(--vi)">
+          <div class="row"><div class="ico"><svg><use href="#s-cert"/></svg></div></div>
+          <h4>Analyse des avis clients avec l'IA</h4><p>Cisco Networking Academy.</p></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="realisations"><div class="wrap">
+  <div class="sec-head center">
+    <p class="eyebrow">Portfolio</p>
+    <h2><span class="det"><span class="conf">0.99</span>Quatre projets, de bout en bout</span></h2>
+    <p class="lead">Quatre projets livrés, du modèle d'apprentissage jusqu'à l'interface utilisée sur le terrain.</p>
+  </div>
+
+  <div class="works">
+    <article class="work" style="--c:var(--cy)">
+      <div class="shot portrait"><span class="strip"></span><span class="chip">IA · Événementiel</span>
+        <img src="assets/myface-visages.webp" alt="MYFACE : visages détectés sur les photos de l'événement, regroupés par ressemblance" loading="lazy"></div>
+      <div class="wbody">
+        <div class="pills"><span>Reconnaissance faciale</span><span>pgvector</span><span>Next.js</span><span>FastAPI</span></div>
+        <h3>MYFACE</h3>
+        <p class="desc">Les photos d'un mariage ou d'une remise de diplômes sont indexées
+        automatiquement. Chaque invité retrouve les siennes en prenant un selfie, les achète et les
+        télécharge en qualité originale, sans faire défiler des centaines d'images.</p>
+        <p class="role"><b>Mon rôle :</b> conception produit et développement complet — backend, frontend, pipeline IA, déploiement.</p>
+        <div class="facts"><div><b>31k</b> lignes</div><div><b>23</b> suites de tests</div><div><b>512-d</b> par visage</div></div>
+        <p class="wlock">Code source privé — démonstration sur demande</p>
+      </div>
+    </article>
+
+    <article class="work" style="--c:var(--lm)">
+      <div class="shot"><span class="strip"></span><span class="chip">IA · Agritech</span>
+        <img src="assets/cacao-dashboard.webp" alt="CacaoVision : tableau de bord des captures, plantes malades, taux de maladie et foyers à traiter" loading="lazy"></div>
+      <div class="wbody">
+        <div class="pills"><span>Deep learning</span><span>Drone</span><span>EfficientNet</span><span>PostgreSQL</span></div>
+        <h3>CacaoVision</h3>
+        <p class="desc">Les parcelles sont photographiées au téléphone ou par drone, puis analysées
+        par un pipeline à quatre modules : sain ou malade, type de maladie, sévérité, risque de
+        propagation. Le tableau de bord remonte les foyers à traiter en priorité.</p>
+        <p class="role"><b>Mon rôle :</b> architecture, pipeline IA, API et interfaces. Sujet de mon mémoire de Master, mené chez SaH Analytics.</p>
+        <div class="facts"><div><b>4</b> modules chaînés</div><div><b>15</b> suites de tests</div></div>
+      </div>
+    </article>
+
+    <article class="work" style="--c:var(--mg)">
+      <div class="shot"><span class="strip"></span><span class="chip">Web · Santé</span>
+        <img src="assets/shot-cimbba-showroom.png" alt="Site CIMBBA : showroom de matériel médical" loading="lazy"></div>
+      <div class="wbody">
+        <div class="pills"><span>Direction artistique</span><span>Intégration</span><span>Projet client</span></div>
+        <h3>CIMBBA</h3>
+        <p class="desc">Refonte du site d'un centre d'imagerie médico-biologique : accueil, page
+        fondateur et showroom de matériel médical avec demande de devis. Direction artistique
+        construite autour du langage visuel de l'imagerie médicale.</p>
+        <p class="role"><b>Mon rôle :</b> direction artistique et intégration, avec cycles de retours client.</p>
+        <div class="wlink"><a href="https://github.com/CheickSid27/SITE-CIMBBA">Code source <span class="arr">↗</span></a></div>
+      </div>
+    </article>
+
+    <article class="work" style="--c:var(--vi)">
+      <div class="shot"><span class="strip"></span><span class="chip">IA · Mobile</span>
+        <img src="assets/shot-audio2.png" alt="Interprète audio : choix du fichier, transcription puis traduction" loading="lazy"></div>
+      <div class="wbody">
+        <div class="pills"><span>Whisper</span><span>Flutter</span><span>FastAPI</span><span>6 plateformes</span></div>
+        <h3>Interprète audio</h3>
+        <p class="desc">L'audio est transcrit par Whisper côté serveur, la langue est détectée
+        automatiquement, puis le texte est traduit. Application Flutter compilée pour six
+        plateformes, accompagnée d'une interface web.</p>
+        <p class="role"><b>Mon rôle :</b> application mobile, API d'inférence et interface web.</p>
+        <div class="facts"><div><b>6</b> plateformes</div><div>Whisper <b>medium</b></div></div>
+        <p class="wlock">Capture d'interface — contenu d'exemple</p>
+      </div>
+    </article>
+  </div>
+
+  <p class="more-note">Deux autres projets ne figurent pas ici : une <b>plateforme de gestion pour une
+  entreprise de BTP</b>, sous accord de confidentialité, et un travail universitaire de groupe sur la
+  <b>classification d'œufs par deep learning</b>. Je peux en parler en entretien.</p>
+</div></section>
+
+<section class="sec alt"><div class="wrap">
+  <div class="sec-head center" style="margin-bottom:34px">
+    <p class="eyebrow">Références</p><h2 style="font-size:clamp(26px,4.4vw,42px)"><span class="det"><span class="conf">0.95</span>Là où j'ai travaillé</span></h2>
+  </div>
+  <div class="trust">
+    <div><b>SaH Analytics</b><span>Data &amp; IA · Abidjan</span></div>
+    <div><b>Ebenyx Technologies</b><span>Informatique · Plateau</span></div>
+    <div><b>CIMBBA</b><span>Imagerie médicale · Bassam</span></div>
+    <div><b>UFHB</b><span>Université · Cocody</span></div>
+    <div><b>Institut CERCO</b><span>Big Data · Abidjan</span></div>
+    <div><b>IIT Grand-Bassam</b><span>Génie logiciel</span></div>
+  </div>
+</div></section>
+
+<section class="sec contact-sec" id="contact"><div class="wrap">
+  <div class="cgrid">
+    <div>
+      <h2><span class="det"><span class="conf">1.00</span>Parlons de votre projet</span></h2>
+      <div class="loc">
+        <span>Abidjan, Côte d'Ivoire</span>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/cheick-sidibe27" aria-label="LinkedIn"><svg><use href="#so-li"/></svg></a>
+          <a href="https://github.com/CheickSid27" aria-label="GitHub"><svg><use href="#so-gh"/></svg></a>
+        </div>
+      </div>
+      <div class="hero-cta"><button class="btn" id="cm" type="button">Copier l'e-mail</button></div>
+    </div>
+    <div class="ccards">
+      <div class="cc"><p>Vous cherchez un profil Data Engineer ou Full Stack ?</p>
+        <span class="val" id="mail2">cheickabdramanesidibe@gmail.com <span class="arr">↗</span></span></div>
+      <div class="cc"><p>Envie d'échanger sur un projet ?</p>
+        <span class="val">+225 07 585 094 03 <span class="arr">↗</span></span></div>
+    </div>
+  </div>
+  <footer>
+    <span>© 2026 CHEICK ABDRAMANE SIDIBÉ — TOUS DROITS RÉSERVÉS</span>
+    <a href="#apropos">Retour en haut ↑</a>
+  </footer>
+</div></section>
+
+<button class="totop" id="tt" type="button" aria-label="Retour en haut">↑</button>
+
+<script>
+(function(){
+  var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var gf = document.getElementById('gf');
+  if (gf && !rm) window.addEventListener('pointermove', function(e){
+    gf.style.setProperty('--mx', (e.clientX / window.innerWidth * 100) + '%');
+    gf.style.setProperty('--my', (e.clientY / window.innerHeight * 100) + '%');
+  }, {passive:true});
+
+  var ring = document.getElementById('ring');
+  if (ring) {
+    var tiles = ring.children, n = tiles.length, step = 360 / n;
+    function place(){
+      var r = window.innerWidth < 560 ? 152 : 222;
+      for (var i = 0; i < n; i++)
+        tiles[i].style.transform = 'rotateY(' + (i * step) + 'deg) translateZ(' + r + 'px)';
+    }
+    place();
+    window.addEventListener('resize', place, {passive:true});
+  }
+
+  var sc = document.getElementById('sc');
+  var lines = [
+    ['$ cat poste.txt', 'data engineer & full stack — sah analytics international'],
+    ['$ ls realisations/', 'myface/  cacaovision/  cimbba/  interprete-audio/  btp/  eggs/'],
+    ['$ ./status --now', 'master IA obtenu — ouvert aux opportunites, Abidjan ou a distance']
+  ];
+  function type(txt, el, done){
+    var i = 0;
+    (function step(){ el.textContent = txt.slice(0, ++i);
+      if (i < txt.length) setTimeout(step, 16); else done && done(); })();
+  }
+  function run(k){
+    if (k >= lines.length) {
+      var c = document.createElement('p');
+      c.className = 'ln'; c.innerHTML = '<span class="pr">$</span> <span class="cur"></span>';
+      sc.appendChild(c); return;
+    }
+    var cmd = document.createElement('p'); cmd.className = 'ln'; sc.appendChild(cmd);
+    type(lines[k][0], cmd, function(){
+      var out = document.createElement('p'); out.className = 'ln out'; sc.appendChild(out);
+      type(lines[k][1], out, function(){ setTimeout(function(){ run(k+1); }, 190); });
+    });
+  }
+  if (sc) {
+    if (rm) lines.forEach(function(l){
+      var a = document.createElement('p'); a.className='ln'; a.textContent=l[0];
+      var b = document.createElement('p'); b.className='ln out'; b.textContent=l[1];
+      sc.appendChild(a); sc.appendChild(b);
+    });
+    else setTimeout(function(){ run(0); }, 420);
+  }
+
+  var io = window.IntersectionObserver ? new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      if (!rm) e.target.classList.add('rv');
+    });
+  }, {threshold:.18}) : null;
+  if (io) document.querySelectorAll('.card,.work,.aw,.trust div,.cc,.det').forEach(function(el){ io.observe(el); });
+
+  function copier(btn, src){
+    var el = document.getElementById(src), t = el.textContent.trim().replace(/\s*↗$/, '');
+    function flash(m){ var o = btn.textContent; btn.textContent = m; setTimeout(function(){ btn.textContent = o; }, 1700); }
+    function pick(){
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); flash('Sélectionné');
+    }
+    try { navigator.clipboard.writeText(t).then(function(){ flash('Copié ✓'); }, pick); }
+    catch (err) { pick(); }
+  }
+  var cm = document.getElementById('cm');
+  if (cm) cm.addEventListener('click', function(){ copier(this, 'mail2'); });
+
+  var tt = document.getElementById('tt');
+  if (tt) tt.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior: rm ? 'auto' : 'smooth'});
+  });
+})();
+</script>
+
+</body>
+</html>
