@@ -207,10 +207,11 @@ h1 .l2{display:block;color:var(--fg)}
 .work{background:var(--panel2);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.2s;min-width:0;
   display:flex;flex-direction:column}
 .work:hover{border-color:var(--c);box-shadow:0 0 52px -20px var(--c);transform:translateY(-4px)}
-.shot{position:relative;background:var(--panel);border-bottom:1px solid var(--line);overflow:hidden}
+.shot{display:block;position:relative;background:var(--panel);border-bottom:1px solid var(--line);overflow:hidden}
 .shot .strip{position:absolute;inset:0 0 auto;height:3px;background:var(--c);z-index:2}
 .shot>img{width:100%;height:330px;object-fit:cover;object-position:top center;display:block}
 .shot.portrait{background:#0A0E15}
+.shot.affiche>img{height:auto;aspect-ratio:1600/925;object-fit:cover}
 .shot.portrait>img{object-fit:contain;padding:14px 0;height:360px}
 .shot .chip{position:absolute;left:14px;top:16px;z-index:3;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
   text-transform:uppercase;background:var(--or);color:#0A0A0A;border-radius:6px;padding:5px 10px;font-weight:700}
@@ -506,17 +507,20 @@ footer{border-top:1px solid var(--line);padding-block:26px 44px;font-family:var(
 
   <div class="works">
     <article class="work" style="--c:var(--cy)">
-      <div class="shot portrait"><span class="strip"></span><span class="chip">IA · Événementiel</span>
-        <img src="assets/myface-visages.webp" alt="MYFACE : visages détectés sur les photos de l'événement, regroupés par ressemblance" loading="lazy"></div>
+      <a class="shot affiche" href="https://myfaceci.online" target="_blank" rel="noopener" aria-label="Découvrir MYFACE sur myfaceci.online"><span class="strip"></span>
+        <img src="assets/myface-affiche.webp" alt="Affiche MYFACE : « Ton visage suffit. » Photo de groupe avec les visages détectés par l'IA, un selfie et les photos retrouvées sur téléphone" loading="lazy"></a>
       <div class="wbody">
         <div class="pills"><span>Reconnaissance faciale</span><span>pgvector</span><span>Next.js</span><span>FastAPI</span></div>
         <h3>MYFACE</h3>
-        <p class="desc">Les photos d'un mariage ou d'une remise de diplômes sont indexées
-        automatiquement. Chaque invité retrouve les siennes en prenant un selfie, les achète et les
-        télécharge en qualité originale, sans faire défiler des centaines d'images.</p>
-        <p class="role"><b>Mon rôle :</b> conception produit et développement complet — backend, frontend, pipeline IA, déploiement.</p>
-        <div class="facts"><div><b>31k</b> lignes</div><div><b>23</b> suites de tests</div><div><b>512-d</b> par visage</div></div>
-        <p class="wlock">Code source privé — démonstration sur demande</p>
+        <p class="desc">Plateforme de distribution de photos d'événements par reconnaissance faciale.
+        Dans un mariage ou une remise de diplômes, des centaines de photos sont prises : MYFACE les
+        analyse, regroupe les invités par visage et permet à chacun de retrouver les siennes à partir
+        d'un simple selfie, puis de les acheter par Mobile Money ou de les imprimer sur une borne.
+        Les photographes y gèrent leurs événements, leurs ventes et leurs packs.</p>
+        <p class="role"><b>Mon rôle :</b> fondateur. Conception du produit, développement complet (pipeline
+        de vision par ordinateur, API, application web, espace photographe, borne) et mise en production.</p>
+        <div class="facts"><div><b>34k</b> lignes</div><div><b>266</b> tests automatisés</div><div><b>512-d</b> par visage</div></div>
+        <div class="wlink"><a href="https://myfaceci.online" target="_blank" rel="noopener">Découvrir MYFACE <span class="arr">↗</span></a></div>
       </div>
     </article>
 
