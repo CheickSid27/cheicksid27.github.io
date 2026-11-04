@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="MYFACE : distribution de photos d'événements par reconnaissance faciale. Projet de Cheick Abdramane Sidibé.">
+<meta property="og:title" content="MYFACE — ton visage suffit">
+<meta property="og:description" content="Un selfie, et chaque invité retrouve ses photos parmi des centaines, puis les achète par Mobile Money ou les imprime sur place.">
+<meta property="og:image" content="https://cheicksid27.github.io/assets/myface-affiche.webp">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#06080D">
+<title>MYFACE</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#06080D; --panel:#0B0F17; --panel2:#111823; --line:#1C2634;
+  --fg:#E4EDF5; --muted:#788CA3;
+  --ac:#F26A1B; --gr:#1FB872;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --disp:"Sora",system-ui,sans-serif;
+  --tech:"Chakra Petch",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--disp);font-weight:300;font-size:16px;line-height:1.65;margin:0;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#06080D}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(242,106,27,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(242,106,27,.045) 1px,transparent 1px);
+  background-size:54px 54px}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;line-height:1.08;text-wrap:balance;font-weight:800;letter-spacing:-.03em}
+p{margin:0}
+a{color:var(--ac);text-decoration:none}
+a:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+img{max-width:100%;display:block}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ac);font-weight:500}
+.lead{font-size:18px;color:#B9C7D6;max-width:68ch}
+.sec{padding-block:72px;position:relative;z-index:1}
+.sec.alt{background:var(--panel);border-block:1px solid var(--line)}
+.sec h2{font-size:clamp(28px,4vw,40px);margin:10px 0 18px}
+.arr{display:inline-block;transition:transform .2s}
+a:hover .arr{transform:translate(3px,-3px)}
+
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:rgba(6,8,13,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.back{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.back:hover{color:var(--fg)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
+  padding:12px 18px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--fg);transition:.18s;font-weight:500}
+.btn:hover{border-color:var(--ac);color:var(--ac);transform:translateY(-2px)}
+.btn.fill{background:var(--ac);color:#140A03;border-color:var(--ac);font-weight:700}
+.btn.fill:hover{color:#140A03;box-shadow:0 0 30px -8px var(--ac)}
+
+.hero{padding-block:56px 28px}
+.hero h1{font-family:var(--tech);font-weight:700;letter-spacing:.01em;font-size:clamp(40px,7vw,68px);margin:12px 0 16px}
+.hero h1 b{color:var(--ac);font-weight:700}
+.poster{display:block;margin-top:34px;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 90px -40px rgba(242,106,27,.4)}
+.poster img{width:100%;height:auto;aspect-ratio:1600/925}
+.meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.meta b{color:var(--fg);font-weight:500}
+
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px}
+.card h3{font-size:18px;letter-spacing:-.01em;margin-bottom:8px;font-weight:700}
+.card p{font-size:14.5px;color:#A9B8C8}
+.card .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gr);margin-bottom:10px;display:block}
+
+.steps{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.steps li::before{counter-increment:s;content:counter(s);font-family:var(--tech);font-weight:700;font-size:22px;color:#140A03;background:var(--ac);
+  width:40px;height:40px;border-radius:10px;display:grid;place-items:center}
+.steps h3{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.steps p{font-size:14.5px;color:#A9B8C8;margin-top:4px}
+.steps .tech{font-family:var(--mono);font-size:11.5px;color:var(--ac);margin-top:8px;letter-spacing:.03em}
+
+.split{display:grid;grid-template-columns:1.25fr .75fr;gap:36px;align-items:center;margin-top:28px}
+figure{margin:0}
+figure img{border-radius:14px;border:1px solid var(--line);width:100%;height:auto}
+figcaption{font-size:13px;color:var(--muted);margin-top:10px}
+.phones{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:30px;counter-reset:p}
+.phones figure img{border-radius:18px;aspect-ratio:480/1040;object-fit:contain;background:#0E1520}
+.phones figcaption{font-size:13.5px;color:#B9C7D6}
+.phones figcaption::before{counter-increment:p;content:counter(p);display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;
+  border-radius:6px;background:var(--ac);color:#140A03;font-family:var(--tech);font-weight:700;font-size:13px}
+.note{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:16px}
+
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.stack span{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:6px 12px;color:#C5D2DF}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+.facts div{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-family:var(--tech);font-weight:600;color:var(--muted);font-size:14px}
+.facts b{display:block;font-size:30px;color:var(--ac);font-variant-numeric:tabular-nums;line-height:1.1}
+.role{border-left:2px solid var(--ac);padding-left:16px;color:#B9C7D6;margin-top:22px;max-width:72ch}
+.role b{color:var(--fg);font-weight:600}
+
+.cta{text-align:center}
+.cta .row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+footer{border-top:1px solid var(--line);padding-block:24px 40px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .cols{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .phones{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .sec{padding-block:54px}
+  .steps li{grid-template-columns:40px 1fr;gap:12px;padding:16px}
+  .steps li::before{width:34px;height:34px;font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav class="top"><div class="in">
+  <a class="back" href="../#realisations">← Portfolio</a>
+  <a class="btn fill" href="https://myfaceci.online" target="_blank" rel="noopener">Voir le site <span class="arr">↗</span></a>
+</div></nav>
+
+<header class="wrap hero">
+  <p class="eyebrow">Projet · Événementiel · Intelligence artificielle</p>
+  <h1>MY<b>FACE</b></h1>
+  <p class="lead">Une plateforme de distribution de photos d'événements par reconnaissance faciale. Dans un mariage
+  ou une remise de diplômes, des centaines de photos sont prises : MYFACE les analyse, et chaque invité retrouve
+  les siennes à partir d'un simple selfie, puis les achète par Mobile Money ou les imprime sur place.</p>
+  <div class="meta"><span><b>Abidjan, Côte d'Ivoire</b></span><span>Projet <b>fondé et développé seul</b></span><span><b>En ligne</b> · myfaceci.online</span></div>
+  <a class="poster" href="https://myfaceci.online" target="_blank" rel="noopener" aria-label="Voir le site MYFACE"><img src="../assets/myface-affiche.webp" alt="Affiche MYFACE : « Ton visage suffit. » Photo de groupe avec les visages détectés par l'IA, un selfie et les photos retrouvées sur téléphone"></a>
+</header>
+
+<section class="sec alt"><div class="wrap">
+  <p class="eyebrow">Le problème</p>
+  <h2>Des centaines de photos, et personne ne retrouve les siennes</h2>
+  <p class="lead">Après un mariage ou une cérémonie, les photos circulent mal : l'invité ne retrouve pas les siennes,
+  et le photographe ne vend qu'une petite partie de son travail.</p>
+  <div class="cols">
+    <div class="card"><span class="k">Le groupe WhatsApp</span><h3>400 photos à faire défiler</h3><p>Les photos arrivent en vrac, compressées. Chacun fait défiler des centaines d'images pour se trouver, puis abandonne.</p></div>
+    <div class="card"><span class="k">Le jour J</span><h3>Les tirages étalés par terre</h3><p>Le photographe imprime à l'avance et étale les tirages : les invités cherchent leur visage un par un, et beaucoup repartent sans rien.</p></div>
+    <div class="card"><span class="k">Le photographe</span><h3>Des ventes perdues</h3><p>Une photo qu'un invité ne voit pas est une photo qu'il n'achète pas. Le travail du photographe est peu valorisé.</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <p class="eyebrow">Comment ça marche</p>
+  <h2>Du déclencheur au téléphone de l'invité</h2>
+  <p class="lead">Chaque photo passe par cinq étapes, du dossier du photographe jusqu'à la recherche par selfie.</p>
+  <ol class="steps">
+    <li><div><h3>Envoi des photos</h3><p>Le photographe choisit un dossier de son ordinateur : chaque nouvelle photo part toute seule, et un sous-dossier devient une partie de l'événement (mairie, réception…). Le serveur produit l'aperçu filigrané et range l'original.</p><p class="tech">Next.js · FastAPI · Cloudflare R2</p></div></li>
+    <li><div><h3>Détection des visages</h3><p>L'IA repère chaque visage de la photo, sur carte graphique. Les détections trop incertaines (voile, main, visage coupé) et les visages minuscules au fond sont écartées.</p><p class="tech">InsightFace SCRFD · ONNX Runtime GPU</p></div></li>
+    <li><div><h3>Empreinte de chaque visage</h3><p>Chaque visage devient une empreinte de 512 nombres : deux photos de la même personne donnent des empreintes proches, même avec un autre angle ou une autre lumière.</p><p class="tech">ArcFace · vecteurs 512 dimensions</p></div></li>
+    <li><div><h3>Recherche par selfie</h3><p>L'invité prend un selfie : son empreinte est comparée à tous les visages de l'événement, et ses photos s'affichent en quelques secondes. Le selfie sert uniquement à la recherche, il n'est pas conservé.</p><p class="tech">PostgreSQL · pgvector · index HNSW</p></div></li>
+    <li><div><h3>Regroupement des invités</h3><p>Sans selfie, « Trouver mon visage » montre une vignette par personne : les visages qui se ressemblent sont regroupés automatiquement, et le calcul est préparé à l'avance pour que l'invité n'attende jamais.</p><p class="tech">DBSCAN · scikit-learn</p></div></li>
+  </ol>
+</div></section>
+
+<section class="sec alt"><div class="wrap">
+  <p class="eyebrow">Ce que voit l'IA</p>
+  <h2>Chaque visage repéré, chaque invité regroupé</h2>
+  <div class="split">
+    <figure><img src="../assets/myface-detection.webp" alt="Photo de groupe : chaque visage est encadré en orange avec son score de confiance" loading="lazy" width="1200" height="798">
+      <figcaption>Les vrais cadres de l'IA sur une photo de l'événement de démonstration, avec le score de confiance de chaque visage.</figcaption></figure>
+    <figure><img src="../assets/myface-trouver.webp" alt="« Trouver mon visage » : une vignette par personne, avec le nombre de photos où elle apparaît" loading="lazy" width="480" height="1040" style="max-width:300px;margin-inline:auto">
+      <figcaption style="text-align:center">« Trouver mon visage » : une vignette par invité, avec le nombre de photos où il apparaît.</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <p class="eyebrow">Le parcours de l'invité</p>
+  <h2>Moins d'une minute, du QR code à la photo</h2>
+  <p class="lead">Rien à installer : tout se passe dans le navigateur du téléphone, ou sur la borne de l'événement.</p>
+  <div class="phones">
+    <figure><img src="../assets/myface-accueil.webp" alt="Page de l'événement ouverte depuis le QR code" loading="lazy" width="480" height="1040"><figcaption>Il scanne le QR code</figcaption></figure>
+    <figure><img src="../assets/myface-selfie.webp" alt="Prise du selfie" loading="lazy" width="480" height="1108"><figcaption>Il prend un selfie</figcaption></figure>
+    <figure><img src="../assets/myface-resultats.webp" alt="Les photos retrouvées, déjà sélectionnées" loading="lazy" width="480" height="1108"><figcaption>Ses photos apparaissent</figcaption></figure>
+    <figure><img src="../assets/myface-paiement.webp" alt="Panier et paiement par Mobile Money" loading="lazy" width="480" height="1043"><figcaption>Il paie par Mobile Money</figcaption></figure>
+    <figure><img src="../assets/myface-borne.webp" alt="Borne de l'événement : panier avec impression des photos" loading="lazy" width="480" height="853"><figcaption>Ou il imprime sur la borne</figcaption></figure>
+  </div>
+  <p class="note">Captures réalisées sur l'événement de démonstration (photos de banque d'images).</p>
+</div></section>
+
+<section class="sec alt"><div class="wrap">
+  <p class="eyebrow">Pour qui</p>
+  <h2>Une plateforme, trois publics</h2>
+  <div class="cols">
+    <div class="card"><h3>Invités</h3><p>Retrouver toutes leurs photos en quelques secondes, les acheter en qualité originale et les télécharger ou les imprimer sur place.</p></div>
+    <div class="card"><h3>Photographes</h3><p>Un espace MYFACE Pro pour gérer leurs événements, envoyer leurs photos, suivre et confirmer leurs ventes, avec des packs par événement.</p></div>
+    <div class="card"><h3>Organisateurs</h3><p>Un QR code à afficher, une galerie protégée par mot de passe si besoin, et la possibilité d'offrir les photos aux invités.</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <p class="eyebrow">Réalisation</p>
+  <h2>Conçu et développé de bout en bout</h2>
+  <p class="role"><b>Mon rôle :</b> fondateur. Conception du produit, pipeline de vision par ordinateur,
+  API, application web, espace photographe, borne d'impression, paiements Mobile Money, mise en production
+  et tests de charge. MYFACE est en ligne et a été testé sur un événement de 1 300 photos.</p>
+  <div class="facts">
+    <div><b>34k</b>lignes de code</div>
+    <div><b>266</b>tests automatisés</div>
+    <div><b>512</b>nombres par visage</div>
+    <div><b>10 000</b>photos en test de charge</div>
+  </div>
+  <div class="stack">
+    <span>Python</span><span>FastAPI</span><span>SQLAlchemy</span><span>PostgreSQL</span><span>pgvector</span><span>InsightFace</span>
+    <span>ONNX Runtime GPU</span><span>scikit-learn</span><span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind CSS</span>
+    <span>Cloudflare R2</span><span>Docker</span><span>Paystack</span>
+  </div>
+</div></section>
+
+<section class="sec alt cta"><div class="wrap">
+  <p class="eyebrow">Découvrir</p>
+  <h2>Voir MYFACE en action</h2>
+  <p class="lead" style="margin-inline:auto">Le site est en ligne, avec un événement de démonstration à essayer depuis votre téléphone. Le code source est privé ; je présente volontiers la plateforme en détail.</p>
+  <div class="row">
+    <a class="btn fill" href="https://myfaceci.online" target="_blank" rel="noopener">Voir le site MYFACE <span class="arr">↗</span></a>
+    <a class="btn" href="../#contact">Me contacter <span class="arr">↗</span></a>
+    <a class="btn" href="../#realisations">Autres projets</a>
+  </div>
+</div></section>
+
+<div class="wrap"><footer>
+  <span>© 2026 CHEICK ABDRAMANE SIDIBÉ</span>
+  <a href="../">Retour au portfolio ↑</a>
+</footer></div>
+</body>
+</html>
